@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">#EBEBEB</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name= "android:text">#FFFFFF</item>
+        <item name="android:windowBackground">#EBEBEB</item>
+        <item name="android:navigationBarColor">#EBEBEB</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+    </style>
+    <style name="SplashScreenTheme" parent="SplashScreen_SplashTheme">
+            <item name="colorPrimary">@color/status_bar_color</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+
+    </style>
+
+</resources>
