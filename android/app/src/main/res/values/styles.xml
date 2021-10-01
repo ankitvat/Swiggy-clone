@@ -7,7 +7,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:statusBarColor">#EBEBEB</item>
         <item name="android:windowLightStatusBar">true</item>
-
+        <item name="android:forceDarkAllowed">false</item>
         <item name= "android:text">#FFFFFF</item>
         <item name="android:windowBackground">#EBEBEB</item>
         <item name="android:navigationBarColor">#EBEBEB</item>
