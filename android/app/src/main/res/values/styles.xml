@@ -12,6 +12,7 @@
         <item name="android:windowBackground">#EBEBEB</item>
         <item name="android:navigationBarColor">#EBEBEB</item>
         <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:overScrollMode">never</item>
 
     </style>
     <style name="SplashScreenTheme" parent="SplashScreen_SplashTheme">

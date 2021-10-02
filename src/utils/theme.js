@@ -41,7 +41,7 @@ const theme = {
     h01: 'Circular Std Medium',
     h1: 'Circular Std Medium',
     h2: 'Circular Std Medium',
-    h3: 'Circular Std Book',
+    h3: 'Circular Std Medium',
     h4: 'Circular Std Book',
     text: 'Circular Std Book',
     subtext: 'Circular Std Medium',
