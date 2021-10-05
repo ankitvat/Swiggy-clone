@@ -104,109 +104,112 @@ export default function Home({navigation: {navigate}}) {
     return <ProductCard item={item} setAddedNoti={setAddedNoti} />;
   };
   return (
-    <SafeAreaView style = {styles.safeArea}>
-    <ScrollView
-      nestedScrollEnabled={true}
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-      bounces={false}
-      bouncesZoom={false}
-      contentContainerStyle={styles.parentLayout}>
-      <View style={styles.header}>
-        <CustomText
-          variant="h1"
-          bold
-          text="Trending Now"
-          style={{letterSpacing: -1.5}}
-        />
-        <View style={styles.icons}>
-          <Icon
-            name="bell"
-            size={scale(30)}
-            color={theme.colors.primary}
-            style={{paddingRight: '1%'}}
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
+        bounces={false}
+        bouncesZoom={false}
+        contentContainerStyle={styles.parentLayout}>
+        <View style={styles.header}>
+          <CustomText
+            variant="h1"
+            bold
+            text="Trending Now"
+            style={{letterSpacing: -1.5}}
           />
-          <Icon name="gear" size={scale(30)} color={theme.colors.primary} />
+          <View style={styles.icons}>
+            <Icon
+              name="bell"
+              size={scale(30)}
+              color={theme.colors.primary}
+              style={{paddingRight: '1%'}}
+            />
+            <Icon name="gear" size={scale(30)} color={theme.colors.primary} />
+          </View>
         </View>
-      </View>
-      <View style={styles.carouselContainer}>
+        <View style={styles.carouselContainer}>
+          <CustomText
+            variant="subtext"
+            text="Frequently bought products."
+            style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+          />
+          <Carousel
+            data={top}
+            renderItem={renderProduct}
+            sliderWidth={w}
+            itemWidth={w / 2.8}
+            slideStyle={{marginLeft: 10}}
+            activeSlideAlignment="start"
+            inactiveSlideOpacity={1}
+            inactiveSlideScale={1}
+          />
+        </View>
         <CustomText
-          variant="subtext"
-          text="Frequently bought products."
-          style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
-        />
-        <Carousel
-          data={top}
-          renderItem={renderProduct}
-          sliderWidth={w}
-          itemWidth={w / 2.8}
-          slideStyle={{marginLeft: 10}}
-          activeSlideAlignment="start"
-          inactiveSlideOpacity={1}
-          inactiveSlideScale={1}
-        />
-      </View>
-      <CustomText 
-        variant="h3"
-        bold
-        style={{letterSpacing:-1, width:w, paddingHorizontal:'4%'}}
-        text="Just for you"
-      />
-      <View style = {styles.couponContainer}>
-        <CustomText 
-          variant="subtext"
+          variant="h3"
           bold
-          style={{textTransform:'uppercase'}}
-          text="Use code 'OFF50' for Flat 50% off!"
+          style={{letterSpacing: -1, width: w, paddingHorizontal: '4%'}}
+          text="Just for you"
         />
-        <CustomText 
-          variant ='terms'
-          text = "*Valid only on selected products"
-          gray
-          
-        />
-      </View>
-      <CustomText 
-        variant="h3"
-        bold
-        text="New Releases"
-        style={{letterSpacing:-1, width:w, paddingHorizontal:'4%', marginVertical:'10%'}}
-      />
-      <View style={[styles.carouselContainer, {marginVertical:'-10%'}]}>
+        <View style={styles.couponContainer}>
+          <CustomText
+            variant="subtext"
+            bold
+            style={{textTransform: 'uppercase'}}
+            text="Use code 'OFF50' for Flat 50% off!"
+          />
+          <CustomText
+            variant="terms"
+            text="*Valid only on selected products"
+            gray
+          />
+        </View>
         <CustomText
-          variant="subtext"
-          text="Check out our new line of products."
-          style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+          variant="h3"
+          bold
+          text="New Releases"
+          style={{
+            letterSpacing: -1,
+            width: w,
+            paddingHorizontal: '4%',
+            marginVertical: '10%',
+          }}
         />
-        <Carousel
-          data={top}
-          renderItem={renderProduct}
-          sliderWidth={w}
-          itemWidth={w / 2.8}
-          slideStyle={{marginLeft: 10}}
-          activeSlideAlignment="start"
-          inactiveSlideOpacity={1}
-          inactiveSlideScale={1}
-        />
-      </View>
-      <View style= {styles.bannerLayout}>
-        <Carousel 
-          data ={banners}
-          renderItem={renderBanner}
-          sliderWidth={w*0.9}
-          
-          itemWidth={w* 0.9}
-          inactiveSlideOpacity={1}
-          inactiveSlideScale={1}
-          onBeforeSnapToItem={(index) => setActive(index)}
-          lockScrollWhileSnapping ={true}
-          autoplay ={true}
-          autoplayInterval={3000}
-          enableSnap ={true}
-          loop ={true}
-        />
-      </View>
-      <Pagination
+        <View style={[styles.carouselContainer, {marginVertical: '-10%'}]}>
+          <CustomText
+            variant="subtext"
+            text="Check out our new line of products."
+            style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+          />
+          <Carousel
+            data={top}
+            renderItem={renderProduct}
+            sliderWidth={w}
+            itemWidth={w / 2.8}
+            slideStyle={{marginLeft: 10}}
+            activeSlideAlignment="start"
+            inactiveSlideOpacity={1}
+            inactiveSlideScale={1}
+          />
+        </View>
+        <View style={styles.bannerLayout}>
+          <Carousel
+            data={banners}
+            renderItem={renderBanner}
+            sliderWidth={w * 0.9}
+            itemWidth={w * 0.9}
+            inactiveSlideOpacity={1}
+            inactiveSlideScale={1}
+            onBeforeSnapToItem={index => setActive(index)}
+            lockScrollWhileSnapping={true}
+            autoplay={true}
+            autoplayInterval={3000}
+            enableSnap={true}
+            loop={true}
+          />
+        </View>
+        <Pagination
           dotsLength={banners.length}
           containerStyle={{
             paddingHorizontal: 0,
@@ -225,14 +228,19 @@ export default function Home({navigation: {navigate}}) {
           inactiveDotScale={1}
         />
 
-      <CustomText 
-        variant="h3"
-        bold
-        text="Shop by Category"
-        style={{letterSpacing:-1, width:w, paddingHorizontal:'4%', marginVertical:'10%'}}
+        <CustomText
+          variant="h3"
+          bold
+          text="Shop by Category"
+          style={{
+            letterSpacing: -1,
+            width: w,
+            paddingHorizontal: '4%',
+            marginVertical: '10%',
+          }}
         />
-        <View style = {styles.categories}>
-        {/* <FlatList 
+        <View style={styles.categories}>
+          {/* <FlatList 
 						numColumns={2}
 						data={categories}
             nestedScrollEnabled={true}
@@ -240,53 +248,57 @@ export default function Home({navigation: {navigate}}) {
             scrollEnabled={false}
 						showsVerticalScrollIndicator={false}
 					/> */}
-        {
-          categories.map((item, index) => {
+          {categories.map((item, index) => {
             return (
               <View style={styles.category} key={index}>
                 <Image source={item} style={styles.categoryImage} />
               </View>
             );
-          })
-        }
-
+          })}
         </View>
-        <CustomText 
-        variant="h3"
-        bold
-        text="Best Sellers"
-        style={{letterSpacing:-1, width:w, paddingHorizontal:'4%', marginVertical:'10%'}}
-        />
-         <View style={[styles.carouselContainer, {marginVertical:'-10%', paddingBottom:'10%'}]}>
         <CustomText
-          variant="subtext"
-          text="Try our best selling products."
-          style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+          variant="h3"
+          bold
+          text="Best Sellers"
+          style={{
+            letterSpacing: -1,
+            width: w,
+            paddingHorizontal: '4%',
+            marginVertical: '10%',
+          }}
         />
-        <Carousel
-          data={top}
-          renderItem={renderProduct}
-          sliderWidth={w}
-          itemWidth={w / 2.8}
-          slideStyle={{marginLeft: 10}}
-          activeSlideAlignment="start"
-          inactiveSlideOpacity={1}
-          inactiveSlideScale={1}
-        />
-      </View>
-    </ScrollView>
+        <View
+          style={[
+            styles.carouselContainer,
+            {marginVertical: '-10%', paddingBottom: '10%'},
+          ]}>
+          <CustomText
+            variant="subtext"
+            text="Try our best selling products."
+            style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+          />
+          <Carousel
+            data={top}
+            renderItem={renderProduct}
+            sliderWidth={w}
+            itemWidth={w / 2.8}
+            slideStyle={{marginLeft: 10}}
+            activeSlideAlignment="start"
+            inactiveSlideOpacity={1}
+            inactiveSlideScale={1}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea:{
-    flex:1,
-   
-
+  safeArea: {
+    flex: 1,
   },
   parentLayout: {
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     paddingVertical: '5%',
     backgroundColor: '#EBEBEB',
@@ -314,54 +326,50 @@ const styles = StyleSheet.create({
     marginVertical: '1%',
   },
   couponContainer: {
-    marginTop:'5%',
-    width: w/1.2,
-    borderRadius:scale(10),
-    backgroundColor:'#ffedcf',
-    borderColor:'#FCCC8C',
-    borderWidth:1,
-    
-    paddingVertical:'3%',
-    alignItems:'center',
+    marginTop: '5%',
+    width: w / 1.2,
+    borderRadius: scale(10),
+    backgroundColor: '#ffedcf',
+    borderColor: '#FCCC8C',
+    borderWidth: 1,
+
+    paddingVertical: '3%',
+    alignItems: 'center',
   },
-  bannerLayout:{
-    width:w,
-    marginVertical:'10%',
-    alignItems:'center',
-    height:h/5,
+  bannerLayout: {
+    width: w,
+    marginVertical: '10%',
+    alignItems: 'center',
+    height: h / 5,
+    overflow: 'hidden',
+  },
+  bannerContainer: {
     overflow: 'hidden',
   
-  },
-  bannerContainer:{
-    overflow: 'hidden',
-  },
-  banner:{
-    resizeMode:'contain',
-    width:'100%',
-    height:'100%',
-    borderRadius:scale(15),
     
   },
-  categories:{
-    flexDirection:'row',
-    flexWrap:'wrap',
-    flex:1,
-    width:w,
-    marginTop:-h/4.8,
-    height:h/1.03,
+  banner: {
+    resizeMode: 'contain',
+    width: '100%',
+    height: '100%',
+    borderRadius: scale(15),
   },
-  category:{
-    
-		height:h/3.9,
-    paddingHorizontal:'2%',
-		
+  categories: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1,
+    width: w,
+    marginTop: -h / 4.8,
+    height: h / 1.03,
   },
-  categoryImage:{
-		borderRadius:scale(10),
-		resizeMode:'contain',
-    marginBottom:'10%',
-		width:w/2.2,
-		
-		
-	},
+  category: {
+    height: h / 3.9,
+    paddingHorizontal: '2%',
+  },
+  categoryImage: {
+    borderRadius: scale(10),
+    resizeMode: 'contain',
+    marginBottom: '10%',
+    width: w / 2.2,
+  },
 });

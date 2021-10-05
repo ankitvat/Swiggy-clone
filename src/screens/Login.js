@@ -167,7 +167,7 @@ export default function Login({navigation: {navigate}}) {
               {backgroundColor: '#04D858', paddingRight: '8%'},
             ]}>
             <Phone width={55} height={55} />
-            <CustomText variant="text" bold text="Mobile Number" num />
+            <CustomText variant="text" bold text="Mobile No." num />
           </View>
           <View
             style={[
