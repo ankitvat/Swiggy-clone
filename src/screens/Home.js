@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Dimensions,
   Image,
@@ -28,32 +26,54 @@ import ca4 from '../assets/images/ca4.png';
 import ca5 from '../assets/images/ca5.png';
 import ca6 from '../assets/images/ca6.png';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import t1 from '../assets/images/topSection/t1.png';
 import t2 from '../assets/images/topSection/t2.png';
 import t3 from '../assets/images/topSection/t3.png';
 import t4 from '../assets/images/topSection/t4.png';
 import t5 from '../assets/images/topSection/t5.png';
+import ProductCard from '../components/home/ProductCard';
 
 const top = [
   {
+    id: 1,
     image: t1,
     backColor: '#F5F5F5',
+    name: 'Ultra defence hybrid sun fluid - SPF 50',
+    oldPrice: '100',
+    newPrice: '50',
   },
   {
+    id: 2,
     image: t2,
-    backColor: 'red',
+    backColor: '#FDF8F5',
+    name: 'Murumuru butter shampoo bar',
+    oldPrice: '200',
+    newPrice: '150',
   },
   {
+    id: 3,
     image: t3,
-    backColor: 'green',
+    backColor: '#E3F4F1',
+    name: 'Lip & Cheek tint',
+    oldPrice: '300',
+    newPrice: '250',
   },
   {
+    id: 4,
     image: t4,
-    backColor: 'blue',
+    backColor: '#FBFAE6',
+    name: 'Phyto-ceramid deep moisturiser',
+    oldPrice: '400',
+    newPrice: '350',
   },
   {
+    id: 5,
     image: t5,
     backColor: 'yellow',
+    name: 'Tinted Lippie - SPF 30',
+    oldPrice: '100',
+    newPrice: '50',
   },
 ];
 const banners = [banner1, banner2, banner3, banner4, banner5];
@@ -62,6 +82,7 @@ const w = Dimensions.get('window').width;
 const h = Dimensions.get('window').height;
 export default function Home({navigation: {navigate}}) {
   const [active, setActive] = React.useState(0);
+  const [addedNoti, setAddedNoti] = useState(null);
   const [carousel, setCarousel] = React.useState(null);
   const renderCategory = ({item, index}) => {
     return (
@@ -78,14 +99,8 @@ export default function Home({navigation: {navigate}}) {
     );
   };
 
-  const renderProduct = ({item}) => {
-    return (
-      <TouchableOpacity activeOpacity={1} style={styles.trendingContainer}>
-        <View style={[styles.cardBG, {backgroundColor: item.backColor}]}>
-          <Image source={item.image} style={styles.image} />
-        </View>
-      </TouchableOpacity>
-    );
+  const renderProduct = ({item, index}) => {
+    return <ProductCard item={item} setAddedNoti={setAddedNoti} />;
   };
   return (
     <ScrollView
@@ -112,12 +127,17 @@ export default function Home({navigation: {navigate}}) {
         </View>
       </View>
       <View style={styles.carouselContainer}>
+        <CustomText
+          variant="subtext"
+          text="Check out our new line of products"
+          style={{letterSpacing: -0.5, paddingHorizontal: '4%'}}
+        />
         <Carousel
           data={top}
           renderItem={renderProduct}
           sliderWidth={w}
-          itemWidth={w * 0.55}
-          slideStyle={{marginLeft: 20}}
+          itemWidth={w / 2.8}
+          slideStyle={{marginLeft: 10}}
           activeSlideAlignment="start"
           inactiveSlideOpacity={1}
           inactiveSlideScale={1}
@@ -153,27 +173,7 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     width: w,
-    marginVertical: '6%',
-  },
-  trendingContainer: {
-    width: '100%',
-    height: h / 4,
-    aspectRatio: 0.6,
-    paddingHorizontal: '6%',
-    paddingTop: '1%',
-    paddingBottom: '5%',
-    justifyContent: 'space-between',
-  },
-  image: {
-    width: '30%',
-    resizeMode: 'contain',
-    height: '30%',
-  },
-  cardBG: {
-    position: 'absolute',
-    bottom: 0,
-    width: w * 0.55,
-    height: '90%',
-    borderRadius: scale(32),
+
+    marginVertical: '1%',
   },
 });
