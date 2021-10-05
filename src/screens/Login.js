@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: scale(55),
     color: 'black',
+    width:w/1.5,
     fontFamily: 'Circular Std Black',
   },
   loginform: {flexDirection: 'column', width: w, paddingHorizontal: '2.5%'},

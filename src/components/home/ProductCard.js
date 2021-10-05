@@ -5,6 +5,7 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  Pressable,
   FlatList,
   TouchableOpacity,
   StatusBar,
@@ -19,6 +20,7 @@ const w = Dimensions.get('window').width;
 
 export default function ProductCard({item, index}) {
   const [heart, setHeart] = useState(false);
+  const [cart, setCart] = useState(false);
   return (
     <TouchableOpacity activeOpacity={1} style={styles.trendingContainer}>
       <View
@@ -54,18 +56,32 @@ export default function ProductCard({item, index}) {
           variant="sosmall"
           bold
           text={`₹ ${item.newPrice}`}
-          style={{marginLeft: '15%'}}
+          style={{marginLeft: '10%'}}
         />
-
+        
         <Icon2
           name="heart"
-          size={scale(20)}
+          size={scale(18)}
           color={heart ? theme.colors.red : theme.colors.lightGray}
-          style={{marginLeft: '5%'}}
+          style={{marginLeft: '10%'}}
           onPress={() => {
             setHeart(!heart);
           }}
         />
+       
+        
+          <Icon2 
+            name="circle-with-plus"
+            size={scale(18)}
+            color={ cart ? '#A4D48C' :theme.colors.lightGray}
+            style={{marginLeft: '4%'}}
+            onPress={() => {
+              setCart(!cart);
+            }}
+          />
+
+       
+        
       </View>
     </TouchableOpacity>
   );

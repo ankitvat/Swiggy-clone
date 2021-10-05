@@ -35,6 +35,7 @@ const theme = {
     subtext: scale(14),
     small: scale(12),
     sosmall: scale(10),
+    terms:scale(8),
   },
   fontFamilies: {
     h0: 'Circular Std Book',
@@ -47,6 +48,7 @@ const theme = {
     subtext: 'Circular Std Book',
     small: 'Circular Std Book',
     sosmall: 'Circular Std Book',
+    terms: 'Circular Std Book',
   },
 };
 
