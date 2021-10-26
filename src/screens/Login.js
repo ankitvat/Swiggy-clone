@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-	SafeAreaView,
+  SafeAreaView,
   Dimensions,
   TextInput,
   FlatList,
@@ -113,7 +113,9 @@ export default function Login({navigation: {navigate}}) {
           text="Forgot password?"
           style={{paddingLeft: '2%', color: '#0484CC'}}
         />
-        <TouchableOpacity onPress={() => navigate('BottomNavigator')} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => navigate('BottomNavigator')}
+          style={styles.button}>
           <CustomText
             onPress={() => navigate('BottomNavigator')}
             variant="text"
@@ -127,7 +129,7 @@ export default function Login({navigation: {navigate}}) {
         <View style={styles.divider}>
           <View
             style={{
-              backgroundColor: '#7C8484',
+              backgroundColor: '#F37F28',
               height: '2%',
               borderRadius: scale(5),
               width: '25%',
@@ -136,7 +138,7 @@ export default function Login({navigation: {navigate}}) {
           <CustomText variant="text" bold text="Or Login Using" />
           <View
             style={{
-              backgroundColor: '#7C8484',
+              backgroundColor: '#F37F28',
               height: '2%',
               borderRadius: scale(5),
               width: '25%',
@@ -172,7 +174,7 @@ export default function Login({navigation: {navigate}}) {
           <View
             style={[
               styles.box1,
-              {backgroundColor: '#0F0C14', paddingHorizontal: '6%'},
+              {backgroundColor: '#F37F28', paddingHorizontal: '6%'},
             ]}>
             <Icon name="person-add" color="#FFF" size={25} />
             <CustomText variant="text" white text="Sign Up" />
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: scale(55),
     color: 'black',
-    width:w/1.5,
+    width: w / 1.5,
     fontFamily: 'Circular Std Black',
   },
   loginform: {flexDirection: 'column', width: w, paddingHorizontal: '2.5%'},
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: '5%',
-    backgroundColor: 'black',
+    backgroundColor: '#F37F28',
     padding: '2%',
     paddingHorizontal: '2%',
     borderRadius: scale(50),

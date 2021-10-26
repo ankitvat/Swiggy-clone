@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -34,47 +34,53 @@ import t4 from '../assets/images/topSection/t4.png';
 import t5 from '../assets/images/topSection/t5.png';
 import ProductCard from '../components/home/ProductCard';
 import theme from '../utils/theme';
+import {useSelector} from 'react-redux';
 
 const top = [
   {
     id: 1,
     image: t1,
     backColor: '#F5F5F5',
-    name: 'Ultra defence hybrid sun fluid - SPF 50',
-    oldPrice: '100',
-    newPrice: '50',
+    name: 'Fried Rice - Hakka Noodles Combo',
+    oldPrice: '165',
+    newPrice: '89',
+    quantity: 0,
   },
   {
     id: 2,
     image: t2,
     backColor: '#FDF8F5',
-    name: 'Murumuru butter shampoo bar',
-    oldPrice: '200',
-    newPrice: '150',
+    name: 'Keventers- Chocolate Vanilla Combo',
+    oldPrice: '480',
+    newPrice: '250',
+    quantity: 0,
   },
   {
     id: 3,
     image: t3,
     backColor: '#E3F4F1',
-    name: 'Lip & Cheek tint',
-    oldPrice: '300',
-    newPrice: '250',
+    name: 'Chicken Paranta (Spicy)',
+    oldPrice: '200',
+    newPrice: '80',
+    quantity: 0,
   },
   {
     id: 4,
     image: t4,
     backColor: '#FBFAE6',
-    name: 'Phyto-ceramid deep moisturiser',
-    oldPrice: '400',
-    newPrice: '350',
+    name: 'Veg Lettuce-Coleslaw Burger',
+    oldPrice: '129',
+    newPrice: '79',
+    quantity: 0,
   },
   {
     id: 5,
     image: t5,
     backColor: 'yellow',
-    name: 'Tinted Lippie - SPF 30',
-    oldPrice: '100',
-    newPrice: '50',
+    name: 'Chicken Sub with Cookies (Dual Combo)',
+    oldPrice: '300',
+    newPrice: '169',
+    quantity: 0,
   },
 ];
 const banners = [banner1, banner2, banner3, banner4, banner5];
@@ -82,9 +88,28 @@ const categories = [ca1, ca2, ca3, ca4, ca5, ca6];
 const w = Dimensions.get('window').width;
 const h = Dimensions.get('window').height;
 export default function Home({navigation: {navigate}}) {
+  const cartQuantity = useSelector(state => state.cart);
+
   const [active, setActive] = React.useState(0);
   const [addedNoti, setAddedNoti] = useState(null);
   const [carousel, setCarousel] = React.useState(null);
+
+  // useEffect(() => {
+  //   dispatch(
+  //     setCartItems({
+  //       cartItems: [
+  //         {
+  //           id: 1,
+  //           name: 'KYu',
+  //           oldPrice:100,
+  //           newPrice: 100,
+  //           quantity: 1,
+  //         },
+  //       ],
+  //     }),
+  //   );
+  // }, []);
+
   const renderCategory = ({item, index}) => {
     return (
       <View style={styles.category}>
@@ -101,7 +126,13 @@ export default function Home({navigation: {navigate}}) {
   };
 
   const renderProduct = ({item, index}) => {
-    return <ProductCard item={item} setAddedNoti={setAddedNoti} />;
+    return (
+      <ProductCard
+        item={item}
+        quantity={cartQuantity[item.id]}
+        setAddedNoti={setAddedNoti}
+      />
+    );
   };
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -113,22 +144,31 @@ export default function Home({navigation: {navigate}}) {
         bouncesZoom={false}
         contentContainerStyle={styles.parentLayout}>
         <View style={styles.header}>
-          <CustomText
-            variant="h1"
-            bold
-            text="Trending Now"
-            style={{letterSpacing: -1.5}}
-          />
+          <View style={{flexDirection: 'row'}}>
+            <Icon
+              name="location"
+              size={scale(24)}
+              color="#000"
+              style={{marginTop: '8%'}}
+            />
+            <CustomText
+              variant="h4"
+              bold
+              text="Home"
+              style={{letterSpacing: -1.5}}
+            />
+          </View>
           <View style={styles.icons}>
             <Icon
               name="bell"
               size={scale(30)}
-              color={theme.colors.primary}
+              color={theme.colors.black}
               style={{paddingRight: '1%'}}
             />
-            <Icon name="gear" size={scale(30)} color={theme.colors.primary} />
+            <Icon name="gear" size={scale(30)} color={theme.colors.black} />
           </View>
         </View>
+
         <View style={styles.carouselContainer}>
           <CustomText
             variant="subtext"
@@ -147,14 +187,14 @@ export default function Home({navigation: {navigate}}) {
           />
         </View>
         <CustomText
-          variant="h3"
+          variant="h4"
           bold
           style={{letterSpacing: -1, width: w, paddingHorizontal: '4%'}}
           text="Just for you"
         />
         <View style={styles.couponContainer}>
           <CustomText
-            variant="subtext"
+            variant="small"
             bold
             style={{textTransform: 'uppercase'}}
             text="Use code 'OFF50' for Flat 50% off!"
@@ -166,7 +206,7 @@ export default function Home({navigation: {navigate}}) {
           />
         </View>
         <CustomText
-          variant="h3"
+          variant="h4"
           bold
           text="New Releases"
           style={{
@@ -229,7 +269,7 @@ export default function Home({navigation: {navigate}}) {
         />
 
         <CustomText
-          variant="h3"
+          variant="h4"
           bold
           text="Shop by Category"
           style={{
@@ -237,6 +277,17 @@ export default function Home({navigation: {navigate}}) {
             width: w,
             paddingHorizontal: '4%',
             marginVertical: '10%',
+            marginTop: '15%',
+          }}
+        />
+        <CustomText
+          variant="subtext"
+          text="Browse our wide range of products."
+          style={{
+            letterSpacing: -1,
+            paddingHorizontal: '4%',
+            width: w,
+            marginTop: '-8%',
           }}
         />
         <View style={styles.categories}>
@@ -264,13 +315,13 @@ export default function Home({navigation: {navigate}}) {
             letterSpacing: -1,
             width: w,
             paddingHorizontal: '4%',
-            marginVertical: '10%',
+            marginVertical: '-5%',
           }}
         />
         <View
           style={[
             styles.carouselContainer,
-            {marginVertical: '-10%', paddingBottom: '10%'},
+            {marginVertical: '3%', paddingBottom: '10%'},
           ]}>
           <CustomText
             variant="subtext"
@@ -310,10 +361,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: w / 1.1,
+    marginRight: '5%',
   },
   icons: {
     flexDirection: 'row',
     marginTop: '1%',
+    marginRight: '-5%',
   },
   trending: {
     width: w,
@@ -340,26 +393,24 @@ const styles = StyleSheet.create({
     width: w,
     marginVertical: '10%',
     alignItems: 'center',
-    height: h / 5,
+    height: h / 3.8,
     overflow: 'hidden',
   },
   bannerContainer: {
     overflow: 'hidden',
-  
-    
   },
   banner: {
     resizeMode: 'contain',
     width: '100%',
     height: '100%',
-    borderRadius: scale(15),
+    borderRadius: scale(5),
   },
   categories: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
     width: w,
-    marginTop: -h / 4.8,
+    marginTop: h / 25.8,
     height: h / 1.03,
   },
   category: {
@@ -367,7 +418,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: '2%',
   },
   categoryImage: {
-    borderRadius: scale(10),
+    borderRadius: scale(5),
     resizeMode: 'contain',
     marginBottom: '10%',
     width: w / 2.2,

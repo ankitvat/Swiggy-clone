@@ -12,8 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import theme from '../utils/theme';
 import {scale} from '../utils/fonts';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 import Home from '../screens/Home.js';
 import Search from '../screens/Search.js';
@@ -21,10 +20,10 @@ import Wishlist from '../screens/Wishlist.js';
 import Profile from '../screens/Profile.js';
 
 const icons = {
-  Home: 'home-filled',
+  Home: 'archive',
   Search: 'search',
-  Wishlist: 'favorite',
-  Profile: 'person',
+  Cart: 'cart',
+  Profile: 'user',
 };
 const BottomNavigator = ({navigation}) => {
   const {navigate} = useNavigation();
@@ -36,7 +35,7 @@ const BottomNavigator = ({navigation}) => {
       initialRouteName="Home"
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#000',
+        tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.gray,
         tabBarShowLabel: true,
         tabBarHideOnKeyboard: true,
@@ -49,7 +48,6 @@ const BottomNavigator = ({navigation}) => {
         tabBarStyle: {
           backgroundColor: '#EBEBEB',
           height: '8%',
-          
         },
         tabBarIcon: ({color}) => {
           const iconName = icons[route.name];
@@ -57,7 +55,7 @@ const BottomNavigator = ({navigation}) => {
             <Icon
               name={iconName}
               color={color}
-              size={22}
+              size={28}
               style={{marginTop: '3%'}}
             />
           );
@@ -66,7 +64,7 @@ const BottomNavigator = ({navigation}) => {
       sceneContainerStyle={{backgroundColor: '#EBEBEB'}}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Wishlist" component={Wishlist} />
+      <Tab.Screen name="Cart" component={Wishlist} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

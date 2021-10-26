@@ -3,7 +3,7 @@ import {scale} from './fonts';
 const theme = {
   roundness: 28,
   colors: {
-    primary1: '#000000',
+    primary: '#F37F28',
     secondary: '#DBE9E3',
     cream: '#F7F4EF',
     black: '#000',
@@ -21,7 +21,7 @@ const theme = {
     green: '#E2F0CB',
     yellow: '#FFE899',
     purple: '#C7CEEA',
-    primary: '#000000',
+    primary1: '#000000',
     back: '#EBEBEB',
   },
   fontSizes: {
@@ -35,7 +35,7 @@ const theme = {
     subtext: scale(14),
     small: scale(12),
     sosmall: scale(10),
-    terms:scale(8),
+    terms: scale(8),
   },
   fontFamilies: {
     h0: 'Circular Std Book',

@@ -5,7 +5,7 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  Pressable,
+  Text,
   FlatList,
   TouchableOpacity,
   StatusBar,
@@ -14,18 +14,26 @@ import Icon2 from 'react-native-vector-icons/Entypo';
 import {scale} from '../../utils/fonts';
 import theme from '../../utils/theme';
 import CustomText from '../Text/CustomText';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  setCartItems,
+  updateCartItem,
+  removeCartItem,
+} from '../../redux/reducers/cartReducer';
 
 const h = Dimensions.get('window').height;
 const w = Dimensions.get('window').width;
 
-export default function ProductCard({item, index}) {
+export default function ProductCard({item, index, quantity}) {
   const [heart, setHeart] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [shown, setShown] = useState(false);
+
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart);
+  const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
   return (
     <TouchableOpacity activeOpacity={1} style={styles.trendingContainer}>
-      <View
-        key={index}
-        style={[styles.cardBG, {backgroundColor: item.backColor}]}>
+      <View key={index} style={[styles.cardBG]}>
         <Image source={item.image} style={styles.image} />
       </View>
       <CustomText
@@ -41,6 +49,7 @@ export default function ProductCard({item, index}) {
           marginTop: h / 4,
           position: 'absolute',
           margin: '5%',
+          marginLeft: '3%',
         }}>
         <CustomText
           variant="sosmall"
@@ -58,7 +67,7 @@ export default function ProductCard({item, index}) {
           text={`₹ ${item.newPrice}`}
           style={{marginLeft: '10%'}}
         />
-        
+
         <Icon2
           name="heart"
           size={scale(18)}
@@ -68,21 +77,57 @@ export default function ProductCard({item, index}) {
             setHeart(!heart);
           }}
         />
-       
-        
-          <Icon2 
+        {shown == false && (
+          <Icon2
             name="circle-with-plus"
             size={scale(18)}
-            color={ cart ? '#A4D48C' :theme.colors.lightGray}
+            color={theme.colors.lightGray}
             style={{marginLeft: '4%'}}
             onPress={() => {
-              setCart(!cart);
+              dispatch(setCartItems(item));
+              setShown(true);
             }}
           />
-
-       
-        
+        )}
       </View>
+      {shown == true && (
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: h / 3.5,
+            position: 'absolute',
+            margin: '5%',
+            marginLeft: '3%',
+            justifyContent: 'space-around',
+            width: '90%',
+            borderWidth: 1,
+            borderRadius: scale(5),
+            borderColor: theme.colors.lightGray,
+          }}>
+          <Icon2
+            name="minus"
+            size={scale(18)}
+            color={theme.colors.lightGray}
+            onPress={() => {
+              if (cartItem.quantity == 1) {
+                setShown(false);
+                dispatch(removeCartItem(item));
+              } else dispatch(updateCartItem({id: item.id, quantity: -1}));
+            }}
+          />
+          <CustomText
+            variant="sosmall"
+            bold
+            text={cartItem.quantity ? cartItem.quantity : 0}
+          />
+          <Icon2
+            name="plus"
+            size={scale(18)}
+            color={theme.colors.lightGray}
+            onPress={() => dispatch(updateCartItem({id: item.id, quantity: 1}))}
+          />
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
@@ -100,11 +145,11 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: '90%',
+    width: '100%',
     position: 'absolute',
-    right: '5%',
-    resizeMode: 'cover',
-    height: '90%',
+    borderRadius: scale(5),
+    resizeMode: 'contain',
+    height: '100%',
   },
   cardBG: {
     position: 'absolute',
